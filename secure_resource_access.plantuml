@@ -1,0 +1,51 @@
+@startuml
+
+hide footbox
+
+participant "**Consumer**\n(IDS Connector)" as C
+participant "**Dynamic Attribute Provisioning Service**\n(DAPS)" as DAPS
+participant "**Provider**\n(IDS Connector)" as P
+participant "Provider Authorization Service" as PAS
+participant "Provider Data Service" as PDS
+participant "**Device Sub-CA**" as DSC
+
+note right of C: X.509 Certificate 
+C -> DAPS: 1a. authenticate
+
+DAPS -> DSC: 1b. verify certificate
+DSC --> DAPS: 1c. verification result
+
+note right of C: Dynamic Attribute Token 
+DAPS --> C: 1d. issue token
+
+group Secure Tunnel Creation   
+
+note right of C: X.509 Certificate 
+C -> P: 2a. authenticate
+
+P -> DSC: 2b. verify certificate
+DSC --> P: 2c. certificate verification result
+
+note left of P: X.509 Certificate 
+P --> C: 2d. authenticate
+
+C -> DSC: 2e. verify certificate
+DSC --> C: 2f. certificate verification result
+
+end
+
+== Secure Connection Established ==
+
+note right of C: Dynamic Attribute Token
+C -> PAS: 3a. request access token
+
+note left of PAS: Access Token
+PAS --> C: 3b. issue token
+
+group Resource Interaction Session
+
+C <-> PDS: 4ff. resource access
+
+end
+
+@enduml
