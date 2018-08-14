@@ -1,0 +1,24 @@
+@startuml
+
+start
+
+title Stage 0: Setup
+
+fork
+:Participant Certification;
+fork again
+:Core Component Certification;
+end fork
+
+:Connector Setup;
+:X.590 Certificate Deployment;
+
+if (Use IDSCP?) then (yes)
+    :DAPS and SOC Registration and Setup;
+endif
+
+:Broker Registration;
+
+stop
+
+@enduml
