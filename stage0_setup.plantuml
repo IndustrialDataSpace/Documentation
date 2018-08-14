@@ -10,14 +10,24 @@ fork again
 :Core Component Certification;
 end fork
 
-:Connector Configuration and Deployment;
-:X.590 Certificate Deployment;
+partition "Content Exchange Setup" {
+	:Create Self-Information;
+	:Setup Data Endpoints;
+	:Deploy Internally;
+}
 
-if (Use IDSCP?) then (yes)
-    :DAPS and SOC Registration and Setup;
-endif
+partition "Security Setup" {
+    :Deploy X.590 Certificate;
 
-:Broker Registration;
+    if (Use IDSCP?) then (yes)
+        :Register and Setup DAPS and SOC;
+    endif
+}
+
+partition "Availability Setup" {
+    :Ensure IDS-wide Reachability;
+    :Register at Broker;
+}
 
 stop
 
