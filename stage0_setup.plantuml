@@ -10,7 +10,7 @@ fork again
 :Core Component Certification;
 end fork
 
-:Connector Setup;
+:Connector Configuration and Deployment;
 :X.590 Certificate Deployment;
 
 if (Use IDSCP?) then (yes)

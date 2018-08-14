@@ -1,0 +1,27 @@
+@startuml
+
+start
+
+title Stage 3: Interoperability & Contracts
+
+if (Connector known?) then (no)
+    :Query Broker;
+else (yes)
+    :Retrieve Self Information;
+endif
+
+:Assess Self Information;
+
+if (assessment successful?) then (no)
+    if (negotiable?) then (yes)
+        :Contract Negotiation;
+    else (no)
+        stop
+    endif
+endif
+
+:Technical Preparation;
+
+stop
+
+@enduml

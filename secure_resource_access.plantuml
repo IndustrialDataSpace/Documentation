@@ -9,31 +9,6 @@ participant "Provider Authorization Service" as PAS
 participant "Provider Data Service" as PDS
 participant "**Device Sub-CA**" as DSC
 
-note right of C: X.509 Certificate 
-C -> DAPS: 1a. authenticate
-
-DAPS -> DSC: 1b. verify certificate
-DSC --> DAPS: 1c. verification result
-
-note right of C: Dynamic Attribute Token 
-DAPS --> C: 1d. issue token
-
-group Secure Tunnel Creation   
-
-note right of C: X.509 Certificate 
-C -> P: 2a. authenticate
-
-P -> DSC: 2b. verify certificate
-DSC --> P: 2c. certificate verification result
-
-note left of P: X.509 Certificate 
-P --> C: 2d. authenticate
-
-C -> DSC: 2e. verify certificate
-DSC --> C: 2f. certificate verification result
-
-end
-
 == Secure Connection Established ==
 
 note right of C: Dynamic Attribute Token
