@@ -1,0 +1,39 @@
+@startuml
+
+hide footbox
+
+title Contract Negotiation
+
+participant "**Consumer**\n(IDS Connector)" as C
+participant "**Provider**\n(IDS Connector)" as P
+participant "Provider Authorization Service" as PAS
+participant "Provider Data Service" as PDS
+participant "Provider Contract Service" as PCS
+
+== Authorized Connection Established ==
+
+note right of C: *Operation ID\n*Access Token\n*Contract
+C -> P: 1. ContractOffer
+
+note right of P: Access Token
+P -> PAS: 2a. operation authorized?
+P <-- PAS: 2b. authorization check result
+
+note right of P: Contract
+P -> PCS: 3a. contract acceptable?
+P <-- PCS: 3b. acceptance verification result
+
+note left of P: Alternative Contracts
+P --> C: 4. ContractOffer (not accepted)
+
+note right of C: One of the suggested\nContracts from (5)
+C -> P: 5. ContractOffer
+
+note right of P: Contract
+P -> PCS: 3a. contract acceptable?
+P <-- PCS: 3b. acceptance verification result
+
+note left of P: Agreed Contract
+P --> C: 4. ContractAgreement
+
+@enduml

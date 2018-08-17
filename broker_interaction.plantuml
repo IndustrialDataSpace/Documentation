@@ -1,0 +1,30 @@
+@startuml
+
+hide footbox
+
+title Broker Interaction
+
+participant "**Connector**" as C
+participant "**Broker**" as B
+participant "Internal Broker Storage" as IBS
+
+== Authorized Session Established ==
+
+note right of C: Connector self-description
+C -> B: RegisterConnector
+activate B
+
+B -> IBS: persistSelfDescription
+activate IBS
+
+note left of IBS: Local self-description\nidentifier
+IBS --> B: selfDescriptionPersisted
+deactivate IBS
+
+
+note left of B: Correlation identifier
+B --> C: ConnectorRegistered
+deactivate B
+
+@enduml
+

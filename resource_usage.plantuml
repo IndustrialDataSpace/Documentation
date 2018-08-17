@@ -1,0 +1,27 @@
+@startuml
+
+hide footbox
+
+title Resource Usage
+
+participant "**Consumer**\n(IDS Connector)" as C
+participant "**Provider**\n(IDS Connector)" as P
+participant "Provider Authorization Service" as PAS
+participant "Provider Data Service" as PDS
+
+== Authorized Connection Established ==
+
+== Optional: Contract Negotiated ==
+
+note right of C: *Operation ID\n*Access Token\n*optional: Contract
+C -> P: 1. invoke operation
+
+P -> PAS: 2a. operation authorized?
+P <-- PAS: 2b. authorization check result
+
+P -> PDS: 3a. procure resource
+P <-- PDS: 3b. procured resource
+
+C <-- P: 4. resource
+
+@enduml

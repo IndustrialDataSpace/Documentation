@@ -18,10 +18,7 @@ partition "Content Exchange Setup" {
 
 partition "Security Setup" {
     :Deploy X.590 Certificate;
-
-    if (Use IDSCP?) then (yes)
-        :Register and Setup DAPS and SOC;
-    endif
+    :Register and Setup DAPS and SOC;
 }
 
 partition "Availability Setup" {

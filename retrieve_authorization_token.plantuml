@@ -3,23 +3,23 @@
 hide footbox
 
 participant "**Consumer**\n(IDS Connector)" as C
-participant "**Dynamic Attribute Provisioning Service**\n(DAPS)" as DAPS
 participant "**Provider**\n(IDS Connector)" as P
 participant "Provider Authorization Service" as PAS
 participant "Provider Data Service" as PDS
-participant "**Device Sub-CA**" as DSC
 
-== Secure Connection Established ==
+== Authenticated Connection Established ==
 
 note right of C: Dynamic Attribute Token
-C -> PAS: 3a. request access token
+C -> PAS: 1a. request access token
 
 note left of PAS: Access Token
-PAS --> C: 3b. issue token
+PAS --> C: 1b. issue token
 
-group Resource Interaction Session
+== Authorized Connection Established ==
 
-C <-> PDS: 4ff. resource access
+group Resource Usage
+
+C <-> PDS: 2ff. //resource transfer, query, transformation, etc.//
 
 end
 
