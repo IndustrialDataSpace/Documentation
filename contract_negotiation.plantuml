@@ -30,10 +30,10 @@ note right of C: One of the suggested\nContracts from (5)
 C -> P: 5. ContractOffer
 
 note right of P: Contract
-P -> PCS: 3a. contract acceptable?
-P <-- PCS: 3b. acceptance verification result
+P -> PCS: 6a. contract acceptable?
+P <-- PCS: 6b. acceptance verification result
 
 note left of P: Agreed Contract
-P --> C: 4. ContractAgreed
+P --> C: 7. ContractAgreed
 
 @enduml

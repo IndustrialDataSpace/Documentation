@@ -22,6 +22,7 @@ P <-- PAS: 2b. authorization check result
 P -> PDS: 3a. procure resource
 P <-- PDS: 3b. procured resource
 
+note left of P: Reference or\nEmbedded in Response
 C <-- P: 4. resource
 
 @enduml

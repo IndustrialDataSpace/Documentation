@@ -10,7 +10,7 @@ participant "Internal Broker Storage" as IBS
 
 == Authorized Session Established ==
 
-note right of C: Connector self-description
+note right of C: *Connector self-description\n*Access Token
 C -> B: RegisterConnector
 activate B
 
