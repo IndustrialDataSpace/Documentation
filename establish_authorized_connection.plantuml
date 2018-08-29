@@ -9,7 +9,7 @@ participant "Provider Data Service" as PDS
 
 == Authenticated Connection Established ==
 
-note right of C: Dynamic Attribute Token
+note right of C: optional: Dynamic Attribute Token
 C -> PAS: 1a. request access token
 
 note left of PAS: Access Token

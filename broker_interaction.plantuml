@@ -2,7 +2,7 @@
 
 hide footbox
 
-title Broker Interaction
+title Exemplary Broker Interaction
 
 participant "**Connector**" as C
 participant "**Broker**" as B
@@ -10,21 +10,41 @@ participant "Internal Broker Storage" as IBS
 
 == Authorized Session Established ==
 
-note right of C: *Connector self-description\n*Access Token
-C -> B: RegisterConnector
-activate B
+group First try: fail on registration
+    note right of C: *Connector self-description\n*Access Token
+    C -> B: 1. ConnectorAvailable
+    note left of B: reason: Not Authorized
+    B --> C: 2. Rejection
+end
 
-B -> IBS: persistSelfDescription
-activate IBS
+group Second try, successful registration
+    C -> B: 3. ConnectorAvailable
+    B -> IBS: 4a. persist self description
+    note left of IBS: Local self-description\nidentifier
+    IBS --> B: 4b. done
+    B --> C: (optional) MessageProcessed
+end
 
-note left of IBS: Local self-description\nidentifier
-IBS --> B: selfDescriptionPersisted
-deactivate IBS
+group Update Connector
+    C -> B: 5. ConnectorConfigurationChange
+    B -> IBS: 6a. update self description
+    IBS --> B: 6b. done
+    B --> C: (optional) MessageProcessed
+end
 
+group Temporarily Deactivate Connector
+    C -> B: 7. ConnectorTemporarilyUnavailable
+    B -> IBS: 8a. flag self description for ignore
+    IBS --> B: 8b. done
+    B --> C: (optional) MessageProcessed
+end
 
-note left of B: Correlation identifier
-B --> C: ConnectorRegistered
-deactivate B
+group Unregister Connector Permanently
+    C -> B: 7. ConnectorUnavailable
+    B -> IBS: 8a. remove self description
+    IBS --> B: 8b. done
+    B --> C: (optional) MessageProcessed
+end
 
 @enduml
 

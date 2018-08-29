@@ -12,28 +12,30 @@ participant "Provider Contract Service" as PCS
 
 == Authorized Connection Established ==
 
-note right of C: *Operation ID\n*Access Token\n*Contract
+note right of C: *Access Token\n*Operation or Resource ID\n*Contract C
 C -> P: 1. ContractOffer
 
 note right of P: Access Token
 P -> PAS: 2a. operation authorized?
 P <-- PAS: 2b. authorization check result
 
-note right of P: Contract
+C <-- P: 2c. RequestInProcess
+
+note right of P: C
 P -> PCS: 3a. contract acceptable?
 P <-- PCS: 3b. acceptance verification result
 
-note left of P: Alternative Contracts
-P --> C: 4. ContractNotAccepted
+note left of P: Alternative Contracts C1'-Cn'
+P --> C: 4. ContractRejected
 
-note right of C: One of the suggested\nContracts from (5)
+note right of C: Select Contract i (Ci') from\nthe suggested contracts in (5)'
 C -> P: 5. ContractOffer
 
-note right of P: Contract
+note right of P: Ci'
 P -> PCS: 6a. contract acceptable?
 P <-- PCS: 6b. acceptance verification result
 
-note left of P: Agreed Contract
+note left of P: Ci'
 P --> C: 7. ContractAgreed
 
 @enduml
