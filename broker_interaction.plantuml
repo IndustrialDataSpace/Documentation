@@ -10,14 +10,14 @@ participant "Internal Broker Storage" as IBS
 
 == Authorized Session Established ==
 
-group First try: fail on registration
+group UC1: fail on registration
     note right of C: *Connector self-description\n*Access Token
     C -> B: 1. ConnectorAvailable
     note left of B: reason: Not Authorized
     B --> C: 2. Rejection
 end
 
-group Second try, successful registration
+group UC2: successful registration
     C -> B: 3. ConnectorAvailable
     B -> IBS: 4a. persist self description
     note left of IBS: Local self-description\nidentifier
@@ -25,21 +25,21 @@ group Second try, successful registration
     B --> C: (optional) MessageProcessed
 end
 
-group Update Connector
+group UC3: Update Connector
     C -> B: 5. ConnectorConfigurationChange
     B -> IBS: 6a. update self description
     IBS --> B: 6b. done
     B --> C: (optional) MessageProcessed
 end
 
-group Temporarily Deactivate Connector
+group UC4: Temporarily Deactivate Connector
     C -> B: 7. ConnectorTemporarilyUnavailable
     B -> IBS: 8a. flag self description for ignore
     IBS --> B: 8b. done
     B --> C: (optional) MessageProcessed
 end
 
-group Unregister Connector Permanently
+group UC5: Unregister Connector Permanently
     C -> B: 7. ConnectorUnavailable
     B -> IBS: 8a. remove self description
     IBS --> B: 8b. done
