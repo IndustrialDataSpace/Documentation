@@ -10,17 +10,15 @@ else (yes)
     :Retrieve Self Information;
 endif
 
-:Assess Self Information;
+:Verify Self Information;
 
-if (assessment successful?) then (no)
-    if (negotiable?) then (yes)
-        :Contract Negotiation;
+if (verification successful?) then (yes)
     else (no)
         stop
-    endif
 endif
 
 :Technical Preparation;
+:Content Negotiation;
 
 stop
 
