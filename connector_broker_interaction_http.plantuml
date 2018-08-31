@@ -5,18 +5,65 @@ participant "Keycloak\n(Identity/Access management)" as K
 participant "Apache Fuseki" as F
 
 autonumber
-C -[#blue]> B: Data/Query Request
-B -[#blue]> K: Authorize Connector
-K -[#blue]> B:Authorization response
+hide footbox
 
-alt on successful authorization
-	B -[#blue]> F: Perform required action
-	F -[#blue]> B:action result
-	B --[#blue]> C:Data/Query response
+group Terms of Access
+    C -> B : request self-description
+    C <-- B : response
 
-else on error
-	autonumber stop
-	B --[#red]> C: Error
-
+    note right of C: what is necessary to craft a token request?
+    C -> C : extract access modalities
 end
+
+group Access Token Retrieval
+    C -[#blue]> K : request access token
+
+    note left of K: JSON Web Token (JWT)
+    K --[#blue]> C : access token response
+end
+
+group Registration
+    note right of C: *message of type ""ConnectorAvailable""\n*payload: connector self-description
+    C -[#blue]> B : register request with JWT
+
+    B -[#blue]> K : check authorization
+    K --[#blue]> B : authorization result
+
+    alt on successfull authorization
+        B -[#blue]> F : persist connector self-description
+        F --[#blue]> B : persistence success/fail
+
+
+        note right of C: message of type ""MessageProcessed""
+        B --[#blue]> C : (optional) registration response
+
+    else on error
+        autonumber stop
+        note right of C: message of type ""Rejection""
+        B --[#red]> C : report failure
+    end
+end
+
+group Subsequent Requests/Queries
+    note right of C: *message of type ""BrokerQuery""\n*describes scope and query language\n*payload: connector self-description
+    C -[#blue]> B : query
+
+    B -[#blue]> K : check authorization
+    K --[#blue]> B : authorization result
+
+    alt on successfull authorization
+        B -[#blue]> F : issue query
+        F --[#blue]> B : query result
+
+
+        note right of C: *message of type ""Result""\n*correlated to query request
+        B --[#blue]> C : result
+
+    else on error
+        autonumber stop
+        note right of C: message of type ""Rejection""
+        B --[#red]> C : report failure
+    end
+end
+
 @enduml
