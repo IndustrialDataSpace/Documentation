@@ -1,0 +1,22 @@
+@startuml
+participant "**Connector**" as C
+participant "**Broker**" as B
+participant "Keycloak\n(Identity/Access management)" as K
+participant "Apache Fuseki" as F
+
+autonumber
+C -[#blue]> B: Data/Query Request
+B -[#blue]> K: Authorize Connector
+K -[#blue]> B:Authorization response
+
+alt on successful authorization
+	B -[#blue]> F: Perform required action
+	F -[#blue]> B:action result
+	B --[#blue]> C:Data/Query response
+
+else on error
+	autonumber stop
+	B --[#red]> C: Error
+
+end
+@enduml

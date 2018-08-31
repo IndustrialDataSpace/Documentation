@@ -1,0 +1,18 @@
+@startuml
+
+interface "HTTPS, MQTT, IDSCP" as H
+
+package "Connector (Data Provider)" {
+  [Controller]
+  [Authorization Service]
+  [Data Service]
+}
+
+node "Other IDS Components" {
+  [Connector (Data Consumer)]
+}
+
+[Connector (Data Consumer)] .. H : use
+[Controller] .. H : use
+
+@enduml
