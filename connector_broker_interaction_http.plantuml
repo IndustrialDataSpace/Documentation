@@ -16,6 +16,7 @@ group Terms of Access
 end
 
 group Access Token Retrieval
+    note right of C: x.509 certificate
     C -[#blue]> K : request access token
 
     note left of K: JSON Web Token (JWT)
