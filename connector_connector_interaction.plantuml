@@ -5,14 +5,16 @@ start
 : 1. C Retrieve Self Information Document SID from P;
 : 2. C Parse SID for description of offered Resources by P;
 : 3. From resource descriptions, C select resource of interest R;
-: 4. C check contract offered by P for R;
+: 4. C Check contract offered by P for R;
 
-if (Contract acceptable for C?) then (no)
-    :5. C Negotiate Contract with P;
+if (Contract specified by P?) then (yes)
+    if (Contract acceptable for C?) then (no)
+        :5. C negotiate Contract with P;
 
-    if (Negotiation successful?) then (yes)
-        else (no)
-            stop
+        if (Negotiation successful?) then (yes)
+            else (no)
+                stop
+        endif
     endif
 endif
 
