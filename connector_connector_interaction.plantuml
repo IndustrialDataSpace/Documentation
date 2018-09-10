@@ -25,7 +25,7 @@ if (Interfaces specified by P?) then (no)
     stop
 endif
 
-: 8. C Check offered Operations for the interfaces;
+: 8. C Check Operations provided by the interfaces;
 : 9. C Select operation of interest O;
 
 if (Custom Protocol Binding specified by P?) then (yes)
