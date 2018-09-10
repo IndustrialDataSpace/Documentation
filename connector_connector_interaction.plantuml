@@ -1,0 +1,42 @@
+@startuml
+
+start
+
+title Steps towards a Data Exchange between Consumer (C) and Provider (P) Connectors
+
+: 1. C Retrieve Self Information Document SID from P;
+: 2. C Parse SID for description of offered Resources by P;
+: 3. From resource descriptions, C select resource of interest R;
+: 4. C check contract offered by P for R;
+
+if (Contract acceptable for C?) then (no)
+    :5. C Negotiate Contract with P;
+
+    if (Negotiation successful?) then (yes)
+        else (no)
+            stop
+    endif
+endif
+
+: 6. C check Interfaces offered by P for R;
+
+if (Interfaces specified by P?) then (no)
+    :7. C access R outside of IDS;
+    stop
+endif
+
+: 8. C Check offered Operations for the interfaces;
+: 9. C Select operation of interest O;
+
+if (Custom Protocol Binding specified by P?) then (yes)
+    : 10a. C invoke O based on Protocol Binding;
+
+    else (no)
+    :10b. C invoke O using IDS messaging type(s);
+endif
+
+: 11. C retrieve operation Result (Data);
+
+stop
+
+@enduml

@@ -7,20 +7,13 @@ participant "Apache Fuseki" as F
 autonumber
 hide footbox
 
-group Terms of Access
-    C -> B : request self-description
-    C <-- B : response
-
-    note right of C: what is necessary to craft a token request?
-    C -> C : extract access modalities
-end
-
 group Access Token Retrieval
-    note right of C: x.509 certificate
-    C -[#blue]> K : request access token
+    note right of C: *message of type AuthorizationTokenRequest\n*x.509 certificate
+    C -[#blue]> K : request authorization token
 
+    note right of C: *message of type AuthorizationTokenResponse
     note left of K: JSON Web Token (JWT)
-    K --[#blue]> C : access token response
+    K --[#blue]> C : authorization token response
 end
 
 group Registration
