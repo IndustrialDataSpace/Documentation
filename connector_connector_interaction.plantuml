@@ -2,8 +2,6 @@
 
 start
 
-title Steps towards a Data Exchange between Consumer (C) and Provider (P) Connectors
-
 : 1. C Retrieve Self Information Document SID from P;
 : 2. C Parse SID for description of offered Resources by P;
 : 3. From resource descriptions, C select resource of interest R;
