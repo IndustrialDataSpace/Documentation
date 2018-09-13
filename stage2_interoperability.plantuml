@@ -2,8 +2,6 @@
 
 start
 
-title Stage 2: Interoperability & Contracts
-
 if (Connector known?) then (no)
     :Query Broker;
 else (yes)

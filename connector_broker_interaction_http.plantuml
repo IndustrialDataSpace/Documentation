@@ -9,11 +9,15 @@ hide footbox
 
 group Access Token Retrieval
     note right of C: *message of type AuthorizationTokenRequest\n*x.509 certificate
-    C -[#blue]> K : request authorization token
+    C -[#blue]> B : request authorization token
+
+    B -[#blue]> K : delegate request
+
+    note left of K: JSON Web Token (JWT)
+    B <-[#blue]-- K : authorization token
 
     note right of C: *message of type AuthorizationTokenResponse
-    note left of K: JSON Web Token (JWT)
-    K --[#blue]> C : authorization token response
+    B --[#blue]> C : authorization token response
 end
 
 group Registration
@@ -39,7 +43,7 @@ group Registration
 end
 
 group Subsequent Requests/Queries
-    note right of C: *message of type ""BrokerQuery""\n*describes scope and query language\n*payload: connector self-description
+    note right of C: *message of type ""BrokerQuery""\n*describes scope and query language\n*payload: query string (e.g., SPARQL)
     C -[#blue]> B : query
 
     B -[#blue]> K : check authorization

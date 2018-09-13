@@ -2,8 +2,6 @@
 
 start
 
-title Stage 0: Setup
-
 fork
 :Participant Certification;
 fork again
@@ -12,8 +10,8 @@ end fork
 
 partition "Content Exchange Setup" {
 	:Create Self-Information;
-	:Setup Data Endpoints;
-	:Deploy Internally;
+	:Setup Data Retrieval Methods;
+	:Deploy locally;
 }
 
 partition "Security Setup" {

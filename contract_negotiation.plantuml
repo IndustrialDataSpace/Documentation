@@ -2,8 +2,6 @@
 
 hide footbox
 
-title Contract Negotiation
-
 participant "**Consumer**\n(IDS Connector)" as C
 participant "**Provider**\n(IDS Connector)" as P
 participant "Provider Authorization Service" as PAS
@@ -12,7 +10,7 @@ participant "Provider Contract Service" as PCS
 
 == Authorized Connection Established ==
 
-note right of C: *Access Token\n*Operation or Resource ID\n*Contract C
+note right of C: *Access Token\n*Resource ID\n*Contract C
 C -> P: 1. ContractRequest
 
 note right of P: Access Token
