@@ -21,7 +21,11 @@ partition "Security Setup" {
 
 partition "Availability Setup" {
     :Ensure IDS-wide Reachability;
-    :Register at Broker;
+
+    if (Retrievability via broker desired?) then (yes)
+        :Register at Broker;
+    endif
+
 }
 
 stop
