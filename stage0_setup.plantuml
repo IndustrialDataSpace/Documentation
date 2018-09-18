@@ -8,7 +8,7 @@ fork again
 :Core Component Certification;
 end fork
 
-partition "Content Exchange Setup" {
+partition "Connector Setup" {
 	:Create Self-Information;
 	:Setup Data Retrieval Methods;
 	:Deploy locally;
