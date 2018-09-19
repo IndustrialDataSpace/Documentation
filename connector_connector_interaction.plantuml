@@ -18,24 +18,31 @@ if (Contract specified by P?) then (yes)
     endif
 endif
 
-: 6. C check Interfaces offered by P for R;
+if (6. Operations specified for R?) then (no)
 
-if (Interfaces specified by P?) then (no)
-    :7. C access R outside of IDS;
-    stop
+    if (7. Endpoints specified for R?) then (no)
+        :8. C access R outside of IDS;
+        stop
+    else (yes)
+        :9. Select and Invoke Endpoint;
+        :10. C Retrieve Data;
+        stop
+    endif
+
+    else (yes)
 endif
 
-: 8. C Check Operations provided by the interfaces;
-: 9. C Select operation of interest O;
+: 11. C Check Operations provided by the interfaces;
+: 12. C Select operation of interest O;
 
 if (Custom Protocol Binding specified by P?) then (yes)
-    : 10a. C invoke O based on Protocol Binding;
+    : 12a. C invoke O based on Protocol Binding;
 
     else (no)
-    :10b. C invoke O using IDS messaging type(s);
+    :12b. C invoke O using IDS messaging type(s);
 endif
 
-: 11. C retrieve operation Result (Data);
+: 13. C retrieve operation Result (Data);
 
 stop
 
