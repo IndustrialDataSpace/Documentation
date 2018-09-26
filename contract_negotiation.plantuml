@@ -4,36 +4,24 @@ hide footbox
 
 participant "**Consumer**\n(IDS Connector)" as C
 participant "**Provider**\n(IDS Connector)" as P
-participant "Provider Authorization Service" as PAS
-participant "Provider Data Service" as PDS
-participant "Provider Contract Service" as PCS
+participant "Provider-internal Contract Service" as PCS
 
 == Authorized Connection Established ==
 
-note right of C: *Access Token\n*Resource ID\n*Contract C
-C -> P: 1. ContractRequest
+note right of C: *Reference to base contract C\n* Suggested contract C' as payload
+C -> P: 1a. ContractRequestMessage
 
-note right of P: Access Token
-P -> PAS: 2a. operation authorized?
-P <-- PAS: 2b. authorization check result
-
-C <-- P: 2c. RequestInProcess
-
-note right of P: C
-P -> PCS: 3a. contract acceptable?
-P <-- PCS: 3b. acceptance verification result
-
-note left of P: Alternative Contract C'
-P --> C: 4. ContractOffer
-
-note right of C: C'
-C -> P: 5. ContractRequest
+C <-- P: 1b. RequestInProcessMessage
 
 note right of P: C'
-P -> PCS: 6a. contract acceptable?
-P <-- PCS: 6b. acceptance verification result
+P -> PCS: 2a. contract acceptable?
+P <-- PCS: 2b. acceptance verification result
 
-note left of P: C'
-P --> C: 7. ContractAgreement
+note left of P: Alternative Contract C''
+P --> C: 3. ContractOfferMessage
+
+note right of C: Agreed contract C'' as payload
+C --> P: 4a. ContractAgreement
+P --> C: 4b. ContractAgreement
 
 @enduml

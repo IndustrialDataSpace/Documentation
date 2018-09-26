@@ -23,9 +23,9 @@ if (6. Operations specified for R?) then (yes)
     :7. Select operation of interest O;
 
         if (8. Interactive endpoint for O available?) then (yes)
-            :8a. C invoke O based on operation binding;
+            :8a. C invoke O using IDS messaging;
         else (no)
-            :8b. C invoke O using IDS messaging;
+            :8b. C invoke O by Interactive Endpoint;
         endif
 
     else (no)
