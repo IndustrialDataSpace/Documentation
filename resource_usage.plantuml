@@ -9,7 +9,7 @@ participant "**Provider**\n(IDS Connector)" as P
 participant "Provider Authorization Service" as PAS
 participant "Provider Data Service" as PDS
 
-== Authorized Connection Established ==
+== Authorized Session Established ==
 
 == Optional: Contract Negotiated ==
 
