@@ -8,7 +8,7 @@ participant "**Connector**" as C
 participant "**Broker**" as B
 participant "Internal Broker Storage" as IBS
 
-== Authorized Session Established ==
+== Authorized Connection Established ==
 
 group UC1: fail on registration
     note right of C: *Connector self-description\n*Access Token

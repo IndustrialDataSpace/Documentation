@@ -7,18 +7,7 @@ participant "Apache Fuseki" as F
 autonumber
 hide footbox
 
-group Access Token Retrieval
-    note right of C: *message of type AuthorizationTokenRequest\n*x.509 certificate
-    C -[#blue]> B : request authorization token
-
-    B -[#blue]> K : delegate request
-
-    note left of K: JSON Web Token (JWT)
-    B <-[#blue]-- K : authorization token
-
-    note right of C: *message of type AuthorizationTokenResponse
-    B --[#blue]> C : authorization token response
-end
+== Authorized Connection Established ==
 
 group Registration
     note right of C: *message of type ""ConnectorAvailable""\n*payload: connector self-description

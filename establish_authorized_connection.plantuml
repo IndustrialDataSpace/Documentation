@@ -4,18 +4,19 @@ hide footbox
 
 participant "**Consumer**\n(IDS Connector)" as C
 participant "**Provider**\n(IDS Connector)" as P
-participant "Provider Authorization Service" as PAS
+participant "Provider-internal Identity\nand Access Management" as PAS
 participant "Provider Data Service" as PDS
 
-== Authenticated Connection Established ==
+== Secure Connection Established ==
 
-note right of C: optional: Dynamic Attribute Token
-C -> PAS: 1a. request access token
+C -> P: 1a. AccessTokenRequest
 
-note left of PAS: Access Token
-PAS --> C: 1b. issue token
+P -> PAS: delegate request
+P <-- PAS: issued token
 
-== Authorized Connection Established ==
+P --> C: 1b. AccessTokenResponse
+
+== Authorized Session Established ==
 
 group Resource Usage
 

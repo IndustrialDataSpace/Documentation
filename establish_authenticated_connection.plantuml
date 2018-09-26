@@ -32,6 +32,6 @@ DSC --> C: 2f. certificate verification result
 
 end
 
-== Authenticated Connection Established ==
+== Authorized Session Established ==
 
 @enduml
