@@ -21,7 +21,7 @@ note left of P: Alternative Contract C''
 P --> C: 3. ContractOfferMessage
 
 note right of C: Agreed contract C'' as payload
-C --> P: 4a. ContractAgreement
-P --> C: 4b. ContractAgreement
+C --> P: 4a. ContractAgreementMessage
+P --> C: 4b. ContractAgreementMessage
 
 @enduml
