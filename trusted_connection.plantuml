@@ -1,0 +1,25 @@
+@startuml
+
+hide footbox
+
+participant "**Consumer**\n(IDS Connector)" as C
+participant "**Identity Provider** (+DAPS)" as IDP
+participant "**Provider**\n(IDS Connector)" as P
+
+note right of C: (1) is proprietary communication
+C -> IDP: 1a. PKI certificate request
+C <-- IDP: 1b. PKI certificate response
+
+note right of C: *IDS infrastructure-level communication\n*contains certificate from (1)
+C -> IDP: 2a. Identity token request
+C <-- IDP: 2b. Identity token response
+
+note right of C: *IDS infrastructure- or participang-level communication\n*contains identity token from (2)
+C -> P: 3a. IDS Message
+
+P -> IDP: 4a. validate identity token
+P <-- IDP: 4b. validation response
+
+C <-- P: 3b. IDS response message
+
+@enduml
