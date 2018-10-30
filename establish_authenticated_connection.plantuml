@@ -7,28 +7,40 @@ participant "**Dynamic Attribute Provisioning Service**\n(DAPS)" as DAPS
 participant "**Provider**\n(IDS Connector)" as P
 participant "**Device Sub-CA**" as DSC
 
-note right of C: X.509 Certificate
-C -> DAPS: 1a. authenticate
+note right of C: *X.509 Certificate\n*Filled JWT request
+C -> DAPS: 1a. authenticate request message ??
 
-DAPS -> DSC: 1b. verify certificate
-DSC --> DAPS: 1c. verification result
+DAPS -> DSC: 1b. get public key of Sub-CA (if not known)
+DSC --> DAPS: 1c. public key of Sub-CA
+note right of DAPS: verify X.509 Certificate
 
-note right of C: Dynamic Attribute Token
-DAPS --> C: 1d. issue token
+note right of C: Dynamic Attribute Token ??
+DAPS --> C: 1d. authenticate response message ?? (JWT)
 
 group Secure Tunnel Creation
 
-note right of C: X.509 Certificate
-C -> P: 2a. authenticate
+note right of C: *X.509 Certificate\n*Security token
+C -> P: 2a. ArtifactRequestMessage
 
-P -> DSC: 2b. verify certificate
-DSC --> P: 2c. certificate verification result
+P -> DSC: 2b. get public key of Sub-CA (if not known)
+DSC --> P: 2c. public key of Sub-CA
+note right of P: verify X.509 Certificate
 
-note left of P: X.509 Certificate
-P --> C: 2d. authenticate
+DAPS <- P: 2d. get public key of DAPS (if not known)
+DAPS --> P: 2e. public key of DAPS
+note right of P: verify security token
 
-C -> DSC: 2e. verify certificate
-DSC --> C: 2f. certificate verification result
+note left of P: *X.509 Certificate\n*Security token
+P --> C: 2f. ArtifactResponseMessage
+
+C -> DSC: 3a. get public key of Sub-CA (if not known)
+DSC --> C: 3b. public key of Sub-CA
+note right of C: verify X.509 Certificate
+
+C -> DAPS: 3c. get public key of DAPS (if not known)
+DAPS --> C: 3d. public key of DAPS
+note right of C: verify security token
+
 
 end
 

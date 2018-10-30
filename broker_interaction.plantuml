@@ -11,8 +11,9 @@ participant "Internal Broker Storage" as IBS
 == Authorized Connection Established ==
 
 group UC1: fail on registration
-    note right of C: *Connector self-description\n*Access Token
+    note right of C: *X.509 certificate\n*Security Token\n*Authorization Token\n*Connector self-description
     C -> B: 1. ConnectorAvailable
+	note right of B: *Evaluate X.509 certificate with CA public key\n*Evaluate Security Token with DAPS public key\n*[Evaluate Authorization [Token with Data Owner public key]]
     note left of B: reason: Not Authorized
     B --> C: 2. Rejection
 end
@@ -20,7 +21,7 @@ end
 group UC2: successful registration
     C -> B: 3. ConnectorAvailable
     B -> IBS: 4a. persist self description
-    note left of IBS: Local self-description\nidentifier
+    note left of IBS: Local self-description\nidentifier and security profile
     IBS --> B: 4b. done
     B --> C: (optional) MessageProcessed
 end
