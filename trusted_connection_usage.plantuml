@@ -7,19 +7,6 @@ participant "**Identity Provider**\n(IP)" as IDP
 participant "**Dynamic Attribute Provisioning Service**\n(DAPS, part of IP component)" as DAPS
 participant "**Data Receiver**\n(IDS Connector or Broker)" as P
 
-note right of C: (1a + 1b) is proprietary communication
-C -> IDP: 1a. PKI certificate request
-C <-- IDP: 1b. PKI certificate response
-
-C -> C: 1c. install certificate
-
-== Data Provider Connector enabled for secure connections (e.g., HTTPS) ==
-
-note right of C: IDS infrastructure-level communication
-C -> DAPS: 2a. "Security" token request
-DAPS -> DAPS: 2b. "Security" token generation
-C <-- DAPS: 2c. "Security" token response
-
 == Data Provider Connector onboarding complete==
 
 note right of C: *IDS infrastructure- or participant-level communication\n*Messages contain security token from (2) in their header
