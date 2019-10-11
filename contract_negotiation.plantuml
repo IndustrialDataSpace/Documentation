@@ -8,8 +8,12 @@ participant "Provider-internal Contract Service" as PCS
 
 == Authorized Connection Established ==
 
-note right of C: *Reference to base contract C\n* Suggested contract C' as payload
+note right of P: C_Offer
 C -> P: 1a. ContractRequestMessage
+C <-- P: 1b. ContractOfferMessage
+
+note right of C: *Reference to base contract C_Offer\n* Suggested contract C' as payload
+C -> P: 2a. ContractOfferMessage
 
 C <-- P: 1b. RequestInProcessMessage
 
